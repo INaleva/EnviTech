@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!--As this assigment requires me to build a dynamic UI from the Json file, I'll build it and populate the data through foreach loops.-->
+
+<div class="container-fluid text-center">
+    <h1 class="display-4">EnviTech json menu</h1>
+    <div class=" row ">
+        <!--Main buttons, At this Json file there are only 3, but could be more.-->
+        @foreach (var monitorType in Model.jsonData.MonitorType)
+        {
+            <div class="dropdown col-lg-4 col-md-3 col-sm-12 p-2">
+                <button class="btn btn-secondary form-control dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @monitorType.Name
+                </button>
+                <div class="dropdown-menu dropright" aria-labelledby="dropdownMenuButton">
+                    <!--Each monitor type has different amount of monitors-->
+                    @foreach (var monitor in Model.jsonData.Monitor)
+                    {
+                        if (monitorType.LegentId == monitor.MonitorTypeId)
+                        {
+                            <button class="btn btn-secondary form-control dropdown-toggle" type="button" id="dropdownInnerMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @monitor.Name
+                            </button>
+                            <div class="dropdown-menu w-100" aria-labelledby="dropdownInnerMenuButton">
+                                <div class="pl-4"><b>AQI [level]</b></div>
+                                <!--Access to the legend, tags data and color.-->
+                                @foreach (var legend in Model.jsonData.Legends)
+                                {
+                                    @foreach (var tags in legend.Tags)
+                                    {
+                                        <div class="legend pb-2 row pl-5">
+                                            <div class="rectangle" style="background:@tags.Color"></div>
+                                            <div class=" pl-2">@tags.Label</div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
