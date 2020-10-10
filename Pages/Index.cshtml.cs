@@ -21,6 +21,8 @@ namespace envitech.Pages
         public string selectedMonitorType { get; set; }
         [BindProperty]
         public string selectedMonitor { get; set; }
+        [BindProperty]
+        public int? selectedMonitorTypeLegendId { get; set; }
 
 
         public void OnGet()
@@ -36,10 +38,12 @@ namespace envitech.Pages
             }
         }
 
-        public void OnPost(string monitorType, string monitor)
+        public void OnPost(string monitorType, string monitor, int monitorTypeLegendId)
         {
             selectedMonitorType = monitorType;
             selectedMonitor = monitor;
+            selectedMonitorTypeLegendId = monitorTypeLegendId;
+
             this.OnGet();
         }
 
