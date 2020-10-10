@@ -8,6 +8,42 @@
 
 <div class="container text-center">
     <h1 class="display-4">EnviTech json menu</h1>
+
+    <div class="container w-100 bg-light border">
+        <!--Display only if selected.-->
+        @if (!(@Model.selectedMonitorType is null))
+        {
+            <div class="row">
+                <div class="col-6">
+                    <h5>Monitor Type: <span class="text-info">@Model.selectedMonitorType</span></h5>
+                </div>
+                <div class="col-6">
+                    <h5>Monitor: <span class="text-info">@Model.selectedMonitor</span></h5>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <b>AQI [level]</b>
+        </div>
+        <!--Build Legend menu.-->
+        @foreach (var legend in Model.jsonData.Legends)
+        {
+            @foreach (var tags in legend.Tags)
+            {
+                <div class="legend pb-2 row pl-2">
+                    <div class="col-1">
+                        <div class="rectangle" style="background:@tags.Color">  </div>
+                    </div>
+                    <div class="col-10 text-left">
+                        @tags.Label
+                    </div>
+                    
+                </div>
+            }
+        }
+    </div>
+
     <div class="row">
         <!--Main buttons, At this Json file there are only 3, but could be more.-->
         @foreach (var monitorType in Model.jsonData.MonitorType)
@@ -16,34 +52,24 @@
                 <button class="btn-secondary form-control dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @monitorType.Name
                 </button>
-                <div class="dropdown-menu dropdown-menu-left w-100 dropright" aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu dropdown-menu-left w-100 dropdown" aria-labelledby="dropdownMenuButton">
                     <!--Each monitor type has different amount of monitors-->
                     @foreach (var monitor in Model.jsonData.Monitor)
                     {
                         if (monitorType.LegentId == monitor.MonitorTypeId)
                         {
-                            <button class="btn-secondary  form-control dropdown-toggle" type="button" id="dropdownInnerMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @monitor.Name
-                            </button>
-                            <div class="dropdown-menu  w-100" aria-labelledby="dropdownInnerMenuButton">
-                                <div class="pl-4"><b>AQI [level]</b></div>
-                                <!--Access to the legend, tags data and color.-->
-                                @foreach (var legend in Model.jsonData.Legends)
-                                {
-                                    @foreach (var tags in legend.Tags)
-                                    {
-                                        <div class="legend pb-2 row pl-4">
-                                            <div class="rectangle" style="background:@tags.Color"></div>
-                                            <div class=" pl-2">@tags.Label</div>
-                                        </div>
-                                    }
-                                }
-                            </div>
+                            <!--Pass info about the selected monitorType and monitor-->
+                            <form method="post">
+                                <input type="hidden" asp-for="@monitorType.Name" name="monitorType" />
+                                <input type="hidden" asp-for="@monitor.Name" name="monitor" />
+                                <input type="submit" value="@monitor.Name" class="btn-secondary  form-control dropdown-item">
+                            </form>
                         }
                     }
                 </div>
             </div>
         }
     </div>
+
 </div>
 

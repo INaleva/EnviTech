@@ -15,19 +15,33 @@ namespace envitech.Pages
 {
     public class IndexModel : PageModel
     {
-        public JsonData jsonData;
+        [BindProperty]
+        public JsonData jsonData { get; set; }
+        [BindProperty]
+        public string selectedMonitorType { get; set; }
+        [BindProperty]
+        public string selectedMonitor { get; set; }
+
+
         public void OnGet()
         {
             //Deserialize Json file.
             string TempPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Legends.json");
 
             string jsonFromFile;
-            using(var reader = new StreamReader(TempPath))
+            using (var reader = new StreamReader(TempPath))
             {
                 jsonFromFile = reader.ReadToEnd();
                 jsonData = JsonConvert.DeserializeObject<JsonData>(jsonFromFile);
             }
-
         }
+
+        public void OnPost(string monitorType, string monitor)
+        {
+            selectedMonitorType = monitorType;
+            selectedMonitor = monitor;
+            this.OnGet();
+        }
+
     }
 }

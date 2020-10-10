@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ilia\\source\\repos\\EnviTech\\envitech\\envitech.csproj": {}
+    "C:\\Users\\ilia\\source\\repos\\envitech2\\envitech\\envitech.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ilia\\source\\repos\\EnviTech\\envitech\\envitech.csproj": {
+    "C:\\Users\\ilia\\source\\repos\\envitech2\\envitech\\envitech.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ilia\\source\\repos\\EnviTech\\envitech\\envitech.csproj",
+        "projectUniqueName": "C:\\Users\\ilia\\source\\repos\\envitech2\\envitech\\envitech.csproj",
         "projectName": "envitech",
-        "projectPath": "C:\\Users\\ilia\\source\\repos\\EnviTech\\envitech\\envitech.csproj",
+        "projectPath": "C:\\Users\\ilia\\source\\repos\\envitech2\\envitech\\envitech.csproj",
         "packagesPath": "C:\\Users\\ilia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ilia\\source\\repos\\EnviTech\\envitech\\obj\\",
+        "outputPath": "C:\\Users\\ilia\\source\\repos\\envitech2\\envitech\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
